@@ -66,15 +66,14 @@ class Reptile(Animal):
 # `animal_sound(animals)`, которая принимает список животных и
 # вызывает метод `make_sound()` для каждого животного.
 
-bird = Bird("Воробей", 2)
-bird.make_sound()
-bird.eat()
 
-mammal = Mammal("Собака", 3)
-mammal.make_sound()
-mammal.eat()
+def animal_sound(animals):
+    for animal in animals:
+        animal.make_sound()
 
-reptile = Reptile("Змея", 1)
-reptile.make_sound()
-reptile.eat()
+# Пример использования функции animal_sound с использованием списка обьектов животных:
+animals = [Bird("Sparrow", 2), Mammal("Dog", 3), Reptile("Snake", 1)]
+animal_sound(animals)
+
+
 
