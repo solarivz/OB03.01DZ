@@ -81,6 +81,21 @@ class Zoo():
         print("Служащие в зоопарке:")
         for s in self.staffs:
             print(s.name)
+    def remove_animal(self, animal):
+        if animal in self.animals:
+            self.animals.remove(animal)
+            print(f"{animal.name} удален из зоопарка.")
+        else:
+            print(f"{animal.name} не найден в зоопарке.")
+
+    def remove_staff(self, staff):
+        if staff in self.staffs:
+            self.staffs.remove(staff)
+            print(f"{staff.name} удален из списка сотрудников зоопарка.")
+        else:
+            print(f"{staff.name} не найден в списке сотрудников зоопарка.")
+
+
 class Employee():
     def __init__(self, name, age):
         self.name = name
@@ -158,9 +173,13 @@ while True:
     print("\nВыберите действие:")
     print("1. Просмотреть животных в зоопарке")
     print("2. Просмотреть сотрудников зоопарка")
-    print("3. Сохранить объекты зоопарка в файл")
-    print("4. Загрузить объекты зоопарка из файла")
-    print("5. Выйти из программы")
+    print("3. Добавить животное в зоопарк")
+    print("4. Удалить животное из зоопарка")
+    print("5. Добавить сотрудника в зоопарк")
+    print("6. Удалить сотрудника из зоопарка")
+    print("7. Сохранить объекты зоопарка в файл")
+    print("8. Загрузить объекты зоопарка из файла")
+    print("9. Выйти из программы")
 
     choice = input("Введите номер действия: ")
 
@@ -169,11 +188,44 @@ while True:
     elif choice == '2':
         zoo.view_staffs()
     elif choice == '3':
-        save_zoo(zoo)
+        name = input("Введите имя животного: ")
+        age = int(input("Введите возраст животного: "))
+        animal = Animal(name, age)
+        zoo.add_animal(animal)
+        print(f"{animal.name} добавлен в зоопарк.")
     elif choice == '4':
-        zoo = load_zoo()
+        name = input("Введите имя животного для удаления: ")
+        animal = next((a for a in zoo.animals if a.name == name), None)
+        if animal:
+            zoo.remove_animal(animal)
+        else:
+            print(f"{name} не найден в зоопарке.")
     elif choice == '5':
+        name = input("Введите имя сотрудника: ")
+        age = int(input("Введите возраст сотрудника: "))
+        staff_type = input("Введите тип сотрудника (zookeeper/veterinarian): ").lower()
+        if staff_type == 'zookeeper':
+            staff = ZooKeeper(name, age)
+        elif staff_type == 'veterinarian':
+            staff = Veterinarian(name, age)
+        else:
+            print("Некорректный тип сотрудника.")
+            continue
+        zoo.add_staff(staff)
+        print(f"{staff.name} добавлен в список сотрудников зоопарка.")
+    elif choice == '6':
+        name = input("Введите имя сотрудника для удаления: ")
+        staff = next((s for s in zoo.staffs if s.name == name), None)
+        if staff:
+            zoo.remove_staff(staff)
+        else:
+            print(f"{name} не найден в списке сотрудников зоопарка.")
+    elif choice == '7':
+        save_zoo(zoo)
+    elif choice == '8':
+        zoo = load_zoo()
+    elif choice == '9':
         print("Выход из программы.")
         break
     else:
-        print("Некорректный выбор. Пожалуйста, введите номер от 1 до 5.")
+        print("Некорректный выбор. Пожалуйста, введите номер от 1 до 9.")
