@@ -61,3 +61,20 @@ class Reptile(Animal):
     def make_sound(self):
         print("Шшш!")
 
+
+# Демонстрация полиморфизма - через функцию
+# `animal_sound(animals)`, которая принимает список животных и
+# вызывает метод `make_sound()` для каждого животного.
+
+bird = Bird("Воробей", 2)
+bird.make_sound()
+bird.eat()
+
+mammal = Mammal("Собака", 3)
+mammal.make_sound()
+mammal.eat()
+
+reptile = Reptile("Змея", 1)
+reptile.make_sound()
+reptile.eat()
+
