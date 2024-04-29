@@ -26,7 +26,7 @@
 чтобы у вашего зоопарка было "постоянное состояние" между запусками
 программы.'''
 
-class Animal:
+class Animal():
     def __init__(self, name, age):
         self.name = name
         self.age = age
@@ -61,6 +61,40 @@ class Reptile(Animal):
     def make_sound(self):
         print("Шшш!")
 
+class Zoo():
+    def __init__(self):
+        self.animals = []
+        self.staffs = []
+
+
+    def add_animal(self, animal):
+        self.animals.append(animal)
+
+    def add_staff(self, staff):
+        self.staffs.append(staff)
+
+    def view_animals(self):
+        print("Животные в зоопарке:")
+        for a in self.animals:
+            print(a.name)
+    def view_staffs(self):
+        print("Служащие в зоопарке:")
+        for s in self.staffs:
+            print(s.name)
+class Employee():
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+class ZooKeeper(Employee):
+
+    def feed_animal(self, animal):
+        print(f"Смотритель зоопарка кормит {animal.name}.")
+
+
+class Veterinarian(Employee):
+    def heal_animal(self, animal):
+        print(f"Ветеринар лечит {animal.name}.")
+
 
 # Демонстрация полиморфизма - через функцию
 # `animal_sound(animals)`, которая принимает список животных и
@@ -72,8 +106,32 @@ def animal_sound(animals):
         animal.make_sound()
 
 # Пример использования функции animal_sound с использованием списка обьектов животных:
-animals = [Bird("Sparrow", 2), Mammal("Dog", 3), Reptile("Snake", 1)]
+animals = [Bird("Воробей", 2), Mammal("Собака", 3), Reptile("Змея", 1)]
 animal_sound(animals)
 
 
+# Создаем обьект Зоопарк
+zoo = Zoo()
+# Добавим обьекты животных в Зоопарк из списка
+for animal in animals:
+    zoo.add_animal(animal)
+# Посмотрим обьекты животных в Зоопарке
+zoo.view_animals()
+
+# Создаем объекты сотрудников
+employee1 = ZooKeeper("Иван", 30)
+employee2 = ZooKeeper("Мария", 25)
+employee3 = Veterinarian("Петр", 35)
+
+# Добавляем сотрудников в зоопарк
+zoo.add_staff(employee1)
+zoo.add_staff(employee2)
+zoo.add_staff(employee3)
+
+# Проверяем, что сотрудники добавлены
+zoo.view_staffs()
+
+# Кормим и лечим животных
+zoo.staffs[0].feed_animal(animals[0])
+zoo.staffs[2].heal_animal(animals[2])
 
