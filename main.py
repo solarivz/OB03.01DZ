@@ -26,3 +26,14 @@
 чтобы у вашего зоопарка было "постоянное состояние" между запусками
 программы.'''
 
+class Animal:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def make_sound(self):
+        pass  # этот метод будет переопределен в подклассах
+
+    def eat(self):
+        print(f"Животное {self.name} ест")
+
