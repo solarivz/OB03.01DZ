@@ -37,3 +37,27 @@ class Animal:
     def eat(self):
         print(f"Животное {self.name} ест")
 
+
+class Bird(Animal):
+    def __init__(self, name, age):
+        super().__init__(name, age)
+
+    def make_sound(self):
+        print("Фью-фью")
+
+
+class Mammal(Animal):
+    def __init__(self, name, age):
+        super().__init__(name, age)
+
+    def make_sound(self):
+        print("Муу!")
+
+
+class Reptile(Animal):
+    def __init__(self, name, age):
+        super().__init__(name, age)
+
+    def make_sound(self):
+        print("Шшш!")
+
